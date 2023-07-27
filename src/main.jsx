@@ -1,15 +1,9 @@
-import {createRoot} from 'react-dom/client';
 import Map, {Source, Layer} from 'react-map-gl';
 
 import ControlPanel from './control-panel';
-import type {SkyLayer} from 'react-map-gl';
 import { useState } from 'react';
-import * as React from 'react';
 import WindDemo from './wind-demo';
-
-const TOKEN = 'pk.eyJ1IjoidGFuZ2xlaTIwMTMxNCIsImEiOiJjbGtmOTdyNWoxY2F1M3Jqczk4cGllYXp3In0.9N-H_79ehy4dJeuykZa0xA'; // Set your mapbox token here
-
-const skyLayer:SkyLayer = {
+const skyLayer = {
   id: 'sky',
   type: 'sky',
   paint: {
@@ -51,7 +45,7 @@ export default function App() {
         onMove={evt=>setState({...state,viewport:evt.viewState})}
         maxPitch={85}
         mapStyle="mapbox://styles/mapbox/satellite-v9"
-        mapboxAccessToken={TOKEN}
+        mapboxAccessToken="pk.eyJ1IjoidGFuZ2xlaTIwMTMxNCIsImEiOiJjbGtmOTdyNWoxY2F1M3Jqczk4cGllYXp3In0.9N-H_79ehy4dJeuykZa0xA"
         terrain={{source: 'mapbox-dem', exaggeration: 1.5}}
       >
         <Source
@@ -85,4 +79,3 @@ export default function App() {
     </>
   );
 }
-createRoot(document.getElementById('root')).render(<App/>)

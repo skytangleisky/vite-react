@@ -39,5 +39,8 @@
   <body>
     <div id="root"></div>
   </body>
-  <script type="module" src="./src/main.tsx"></script>
+  <script type="module">
+    import {renderToDom} from './src/application.jsx'
+    renderToDom(document.getElementById('root'))
+  </script>
 </html>
