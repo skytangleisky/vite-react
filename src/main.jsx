@@ -1,17 +1,22 @@
 // import React from 'react'
-import ReactDOM from 'react-dom/client'
+// import { createRoot } from 'react-dom/client'
 // import App from './App.jsx'
 // import './index.css'
 
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-// )
+// export function renderToDom(container) {
+//   createRoot(container).render(
+//     <React.StrictMode>
+//       <App />
+//     </React.StrictMode>,
+//   )
+// }
+
+
+
 
 import {Component} from 'react';
 import autobind from 'react-autobind';
-// import {render} from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import MapGL from 'react-map-gl';
 
 import WindDemo from './wind-demo';
@@ -23,9 +28,6 @@ const animate = () => {
   TWEEN.update();
   window.requestAnimationFrame(animate);
 };
-
-// Set your mapbox token here
-const MAPBOX_TOKEN = 'pk.eyJ1IjoidGFuZ2xlaTIwMTMxNCIsImEiOiJjbGtmOTdyNWoxY2F1M3Jqczk4cGllYXp3In0.9N-H_79ehy4dJeuykZa0xA'; // eslint-disable-line
 
 class Root extends Component {
   constructor(props) {
@@ -83,37 +85,37 @@ class Root extends Component {
 
   render() {
     const {viewport, settings} = this.state;
-    // const style={
-    //   'version': 8,
-    //   'sources': {
-    //     'raster-tiles': {
-    //       'type': 'raster',
-    //       'tiles': [
-    //         // 'https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
-    //         'https://tanglei.site:3210/maps/vt?lyrs=y&gl=CN&x={x}&y={y}&z={z}'
-    //       ],
-    //       'tileSize': 256,
-    //       'attribution': 'Map tiles by <a target="_top" rel="noopener" href="http://stamen.com">Stamen Design</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" rel="noopener" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
-    //     }
-    //   },
-    //   'layers': [
-    //     {
-    //       'id': 'simple-tiles',
-    //       'type': 'raster',
-    //       'source': 'raster-tiles',
-    //       'minzoom': 0,
-    //       'maxzoom': 22
-    //     }
-    //   ]
-    // }
+    const style={
+      'version': 8,
+      'sources': {
+        'raster-tiles': {
+          'type': 'raster',
+          'tiles': [
+            // 'https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg',
+            'https://tanglei.site:3210/maps/vt?lyrs=y&gl=CN&x={x}&y={y}&z={z}'
+          ],
+          'tileSize': 256,
+          'attribution': 'Map tiles by <a target="_top" rel="noopener" href="http://stamen.com">Stamen Design</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" rel="noopener" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
+        }
+      },
+      'layers': [
+        {
+          'id': 'simple-tiles',
+          'type': 'raster',
+          'source': 'raster-tiles',
+          'minzoom': 0,
+          'maxzoom': 22
+        }
+      ]
+    }
     return (
       <div>
         <MapGL
           {...viewport}
           mapStyle="mapbox://styles/mapbox/dark-v9"
-          mapboxApiAccessToken={MAPBOX_TOKEN}
-          dragRotate
+          mapboxApiAccessToken="pk.eyJ1IjoidGFuZ2xlaTIwMTMxNCIsImEiOiJjbGtmOTdyNWoxY2F1M3Jqczk4cGllYXp3In0.9N-H_79ehy4dJeuykZa0xA"
           onViewportChange={this._updateViewport}
+          style={{position:'absolute'}}
         >
           <WindDemo viewport={viewport} settings={settings} />
         </MapGL>
@@ -142,10 +144,5 @@ class Root extends Component {
   }
 }
 
-// render(<Root />, document.body.appendChild(document.createElement('div')));
+createRoot(document.getElementById('root')).render(<Root/>)
 
-ReactDOM.createRoot(document.body.appendChild(document.createElement('div'))).render(
-  // <React.StrictMode>
-    <Root />
-  // </React.StrictMode>,
-)

@@ -1,5 +1,5 @@
 /* global, window */
-import React, {Component} from 'react';
+import {Component} from 'react';
 import DeckGL, {ScatterplotLayer} from 'deck.gl';
 import PropTypes from 'prop-types';
 import {isWebGL2, registerShaderModules} from 'luma.gl';
@@ -67,18 +67,20 @@ export default class WindDemo extends Component {
     }
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const {
-      settings: {showParticles}
-    } = nextProps;
-    if (this.props.settings.showParticles !== showParticles) {
-      if (showParticles) {
-        this._particleAnimation.start();
-      } else {
-        this._particleAnimation.stop();
-      }
-    }
-  }
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   const {
+  //     settings: {showParticles}
+  //   } = nextProps;
+  //   if (this.props.settings.showParticles !== showParticles) {
+  //     if (showParticles) {
+  //       console.log('start')
+  //       this._particleAnimation.start();
+  //     } else {
+  //       console.log('stop')
+  //       this._particleAnimation.stop();
+  //     }
+  //   }
+  // }
 
   componentWillUnmount() {
     this._particleAnimation.stop();
@@ -118,8 +120,8 @@ export default class WindDemo extends Component {
         id: 'stations',
         data: stations,
         getPosition: d => [-d.long, d.lat, d.elv],
-        getColor: d => [200, 200, 100],
-        getRadius: d => 150,
+        getColor: () => [200, 200, 100],
+        getRadius: () => 150,
         opacity: 0.2,
         radiusScale: 30
       }),
