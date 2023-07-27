@@ -97,10 +97,12 @@ export default class WindDemo extends Component {
       return (
         <div
           style={{
+            position:'absolute',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh'
+            height: '100vh',
+            width: '100vw'
           }}
         >
           <h2> {"THIS DEMO REQUIRES WEBLG2, BUT YOUR BRWOSER DOESN'T SUPPORT IT"} </h2>
